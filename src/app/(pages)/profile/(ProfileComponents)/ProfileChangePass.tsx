@@ -7,37 +7,40 @@ function ChangePasswordModal({ visible, onClose }: { visible: boolean; onClose: 
     const [pass, setPass] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [loading, setLoading] = useState(false);
   
     const handleSubmit = async () => {
       if (newPassword !== confirmPassword) {
         toast.error("As senhas não coincidem.");
         return;
       }
-
-      if(pass===""){
+    
+      if (pass === "") {
         toast.error("Digite a senha actual");
         return;
       }
-  
+    
+      setLoading(true);
       try {
         const response = await APICHANGEPASS({
-            current_password: pass,
-            password: newPassword,
-            password_confirmation: confirmPassword,
-          });
-          
-  /* if (response?.status === 1 || response?.success) {
-    toast.success("Senha alterada com sucesso!");
-    onClose();
-  } else {
-    toast.error(response?.message || "Erro ao alterar a senha.");
-  } */          
+          current_password: pass,
+          password: newPassword,
+          password_confirmation: confirmPassword,
+        });
+    
+        if (response?.success === true) {
+          toast.success("Senha alterada com sucesso!");
+          onClose();
+        } else {
+          toast.error(response?.message || "Erro ao alterar a senha.");
+        }
       } catch (err) {
         toast.error("Erro de servidor.");
-      }     
-     /*  toast.success("Senha alterada com sucesso!"); 
-      onClose(); */
+      } finally {
+        setLoading(false);
+      }
     };
+    
   
     if (!visible) return null;
   
@@ -80,10 +83,11 @@ function ChangePasswordModal({ visible, onClose }: { visible: boolean; onClose: 
                 Cancelar
             </button>
             <button
-                onClick={handleSubmit}
-                className="bg-[#FF453A] hover:bg-red-600 transition text-white px-4 py-2 rounded cursor-pointer"
+              onClick={handleSubmit}
+              disabled={loading}
+              className={`bg-[#FF453A] hover:bg-red-600 transition text-white px-4 py-2 rounded cursor-pointer ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-                Salvar
+              {loading ? "Salvando..." : "Salvar"}
             </button>
             </div>
         </div>

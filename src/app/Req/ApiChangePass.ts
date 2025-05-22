@@ -10,10 +10,12 @@ export default async function APICHANGEPASS({
   password_confirmation: string;
 }) {
   try {
+    const token = localStorage.getItem('token');
     const response = await fetch(`${API_URL}/password`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({
         current_password,
