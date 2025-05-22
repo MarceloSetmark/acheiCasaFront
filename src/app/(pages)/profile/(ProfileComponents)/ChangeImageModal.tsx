@@ -2,6 +2,9 @@
 
 import { useState, useRef, ChangeEvent } from 'react';
 import Image from 'next/image';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import  APIUPLOADIMAGE from '@/app/Req/ApiUploadPicture'
 
 interface ProfileImageModalProps {
   isOpen: boolean;
@@ -25,19 +28,21 @@ export default function ProfileImageModal({
   if (!isOpen) return null;
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setError(null);
+    /* setError(null); */
     const file = e.target.files?.[0];
     
     if (!file) return;
 
     // Validação básica do arquivo
     if (!file.type.startsWith('image/')) {
-      setError('Por favor, selecione um arquivo de imagem válido.');
+      /* setError('Por favor, selecione um arquivo de imagem válido.'); */
+      toast.error('Por favor, selecione um arquivo de imagem válido.')
       return;
     }
 
-    if (file.size > 5 * 1024 * 1024) { // 5MB
-      setError('A imagem deve ter menos de 5MB.');
+    if (file.size > 2 * 1024 * 1024) { 
+      /* setError('A imagem deve ter menos de 2MB.'); */
+      toast.error('A imagem deve ter menos de 2MB.')
       return;
     }
 
@@ -47,16 +52,23 @@ export default function ProfileImageModal({
 
   const handleUpload = async () => {
     if (!selectedFile) {
-      setError('Por favor, selecione uma imagem.');
+        toast.error('Por favor, selecione uma imagem.');
       return;
     }
-
+    setIsUploading(true);
     try {
-      setIsUploading(true);
-      await onUpload(selectedFile);
-      handleClose();
+        const response = await APIUPLOADIMAGE(selectedFile);
+        if (response?.success === true) {
+            toast.success('Imagem enviada com sucesso!');
+          } else {
+            toast.error('Falha no envio da imagem.');
+          }
+        setTimeout(() => {
+            handleClose();
+            location.reload();
+        }, 4000);
     } catch (err) {
-      setError('Ocorreu um erro ao fazer upload. Por favor, tente novamente.');
+        toast.error('Ocorreu um erro ao fazer upload. Por favor, tente novamente.');
       console.error('Upload error:', err);
     } finally {
       setIsUploading(false);
@@ -67,7 +79,7 @@ export default function ProfileImageModal({
     setSelectedFile(null);
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     setPreviewUrl(null);
-    setError(null);
+/*     setError(null); */
     onClose();
   };
 
@@ -77,6 +89,7 @@ export default function ProfileImageModal({
 
   return (
     <div className="fixed inset-0 bg-[#191919]/80 flex items-center justify-center z-500 p-4">
+        <ToastContainer />
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
         <div className="p-6">
           <div className="flex justify-between items-center mb-4">
@@ -139,24 +152,24 @@ export default function ProfileImageModal({
             )}
           </div>
 
-          {error && (
+          {/* {error && (
             <div className="mb-4 p-2 bg-red-500 text-red-600 rounded-md text-sm">
               {error}
             </div>
-          )}
+          )} */}
 
           <div className="flex justify-end gap-3">
             <button
               onClick={handleClose}
               disabled={isUploading}
-              className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-50"
+              className="cursor-pointer px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-50"
             >
               Cancelar
             </button>
             <button
               onClick={handleUpload}
               disabled={!selectedFile || isUploading}
-              className="px-4 py-2 bg-[#FF453A] text-white rounded-md hover:bg-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="cursor-pointer px-4 py-2 bg-[#FF453A] text-white rounded-md hover:bg-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isUploading ? 'Enviando...' : 'Salvar'}
             </button>
