@@ -1,42 +1,52 @@
-
 'use client'
 
-import React from 'react'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import "./home.css"
-import casas from './obje';
 import Filter from '../../(components)/Filter/filter'
-import HouseCard from '@/app/(components)/Cards/HouseCard';
+import HouseCard from '@/app/(components)/Cards/HouseCard'
 import Loader from '@/app/(components)/Loader/loader'
-
+import APIPROPERTY from '@/app/Req/ApiProperty'
+import NoResults from './homeComponents/homeNotFound'
 const Home = () => {
-    const [loading, setLoading] = useState(true)
-    useEffect(() => {
-        const timer = setTimeout(() => {
-        setLoading(false)
-        }, 1500)
+  const [loading, setLoading] = useState(true)
+  const [property, setProperty] = useState<any[]>([])
 
-        return () => clearTimeout(timer)
-    }, [])
+  useEffect(() => {
+    async function fetchProperties() {
+      try {
+        const properties = await APIPROPERTY()
+        setProperty(properties)
+      } catch (error) {
+        console.log("Erro ao pegar propriedades: ", error)
+      }
+    }
+    fetchProperties()
+  }, [])
 
-    if (loading) return <Loader />
-   /*  const tokenExemplo = getItem('token', token);
-    console.log(tokenExemplo);
-    if (tokenExemplo){
-        console.log("Tem Token")
-    } else {
-        console.log("Nao tem Tokem");
-    } */
-    return (
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 1500)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (loading) return <Loader />
+
+  if (!loading && property.length === 0) {
+    return <NoResults />;
+  }
+
+  return (
     <section className="mx-auto px-4 py-8 mt-[98px]">
-        <Filter visible={false} />
-        <div id="home" className="grid grid-cols-1 relative gap-[35px] py-[30px]">
-            {casas.map((casa) => (
-                <HouseCard object={casa} />
-            ))}
-        </div>
+      <Filter visible={false} />
+      <div id="home" className="grid grid-cols-1 relative gap-[35px] py-[30px]">
+        {property.map((casa, index) => (
+          <HouseCard key={index} object={casa} />
+        ))}
+      </div>
     </section>
-    );
+  )
 }
 
 export default Home
