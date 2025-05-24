@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import MenuProfile from '../../(ProfileComponents)/ProfileMenu';
@@ -33,7 +32,7 @@ export default function Announcement () {
                     <ProfileAnnouncementCard
                         key={item.id}
                         announcement={item}
-                        onEdit={() => handleCardClick(item.id)} // redireciona para edição
+                        onEdit={() => handleCardClick(item.id)} 
                         onFavorite={() => console.log("Favorite", item.id)}
                     />
                 ))}
