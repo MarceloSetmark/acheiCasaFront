@@ -5,7 +5,7 @@ import MenuProfile from '../../(ProfileComponents)/ProfileMenu';
 import ProfileContainer from '../../(ProfileComponents)/ProfileContainer';
 import Loader from '@/app/(components)/Loader/loader';
 import Image from 'next/image';
-import FavoriteCard from './FavoriteComponents/FavoriteCard';
+import FavoriteCard from '../announcement/(FavoriteComponents)/FavoriteCard';
 
 export default function Favorite () {
     const [loading, setLoading] = useState(true);

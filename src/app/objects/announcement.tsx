@@ -1,52 +1,82 @@
 const announcement = [
   {
-    id: 1,
-    titulo: "Vila Alice, Luanda",
-    preco: "3.200.000,00",
-    dimensoes: "20×30m",
-    status: "Activo",
-    visualizacoes: 1542,
-    favoritos: 820,
-    cliques: 103,
-    imagem: "https://i.ibb.co/Y4XmbyQs/12210e817bc81b3c098f358fe631496c.jpg",
-    favoritoStatus: false,
-  },
-  {
-    id: 2,
-    titulo: "Maianga, Luanda",
-    preco: "2.750.000,00",
-    dimensoes: "18×25m",
-    status: "Inactivo",
-    visualizacoes: 980,
-    favoritos: 410,
-    cliques: 45,
-    imagem: "https://i.ibb.co/wZMq67Rb/c691e7f1da8c4e06a451d3689a840f10.jpg",
-    favoritoStatus: true,
-  },
-  {
-    id: 3,
-    titulo: "Kilamba, Belas",
-    preco: "4.800.000,00",
-    dimensoes: "25×30m",
-    status: "Activo",
-    visualizacoes: 2013,
-    favoritos: 1120,
-    cliques: 76,
-    imagem: "https://i.ibb.co/tPKqrk3b/e68ab7e13a5a7fb81c26f5b1fe0b5a09.jpg",
-    favoritoStatus: false,
-  },
-  {
-    id: 4,
-    titulo: "Patriota, Talatona",
-    preco: "5.100.000,00",
-    dimensoes: "30×35m",
-    status: "Inactivo",
-    visualizacoes: 733,
-    favoritos: 230,
-    cliques: 21,
-    imagem: "https://i.ibb.co/sdCy3Jss/0deb3ad82eb27232b88115b0a08aed23.jpg",
-    favoritoStatus: true,
-  },
+    "id": 11,
+    "user_id": 1,
+    "category_id": "Praia",
+    "title": "Apartamento do Sequele",
+    "type": null,
+    "status": "usado",
+    "type_of_business": "A",
+    "furnished": "yes",
+    "country": "Angola",
+    "address": "Centralidade do Sequele",
+    "city": "Cacuaco",
+    "province": "Icolo Bengo",
+    "location": {
+        "lat": -8.8383,
+        "lng": 13.2344
+    },
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid reprehenderit sint cum optio obcaecati mollitia, quidem in, iusto necessitatibus cupiditate sequi ratione eum iure vitae odio delectus autem quasi eligendi!",
+    "room": 1,
+    "bathroom": 1,
+    "useful_sand": null,
+    "price": 150000,
+    "deleted": false,
+    "favorite": 0,
+    "created_at": "2025-04-22T15:47:30.000000Z",
+    "updated_at": "2025-04-22T15:47:30.000000Z",
+    "accommodation_photo": [
+        {
+            "id": 1,
+            "property_id": 11,
+            "photo_path": "https://i.ibb.co/sdCy3Jss/0deb3ad82eb27232b88115b0a08aed23.jpg",
+            "deleted": false
+        },
+        {
+            "id": 2,
+            "property_id": 11,
+            "photo_path": "https://i.ibb.co/sdCy3Jss/0deb3ad82eb27232b88115b0a08aed23.jpg",
+            "deleted": false
+        }
+    ],
+    "offer": [
+        {
+            "id": 1,
+            "property_id": 11,
+            "offer_option_id": 1,
+            "deleted": false
+        },
+        {
+            "id": 2,
+            "property_id": 11,
+            "offer_option_id": 2,
+            "deleted": false
+        }
+    ],
+    "contact": [
+        {
+            "id": 1,
+            "agency_id": null,
+            "property_id": 11,
+            "type": "W",
+            "value": "+244936028718"
+        },
+        {
+            "id": 2,
+            "agency_id": null,
+            "property_id": 11,
+            "type": "C",
+            "value": "+244956654336"
+        },
+        {
+            "id": 3,
+            "agency_id": null,
+            "property_id": 11,
+            "type": "M",
+            "value": "geral@achei.ao"
+        }
+    ]
+}
 ];
 
 export default announcement;

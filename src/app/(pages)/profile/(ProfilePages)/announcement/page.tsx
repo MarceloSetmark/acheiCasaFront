@@ -1,39 +1,43 @@
-"use client"
+'use client'
+
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import MenuProfile from '../../(ProfileComponents)/ProfileMenu';
-import ProfileContainer from '../../(ProfileComponents)/ProfileContainer';
-import Loader from '@/app/(components)/Loader/loader'
 import ProfileAnnouncementCard from '../../(ProfileComponents)/ProfileAnnouncementCard';
+import Loader from '@/app/(components)/Loader/loader';
 import Anuncios from '../../../../objects/announcement';
 
 export default function Announcement () {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+    const router = useRouter();
+
     useEffect(() => {
         const timer = setTimeout(() => {
-        setLoading(false)
-        }, 1500)
+            setLoading(false);
+        }, 1500);
 
-        return () => clearTimeout(timer)
-    }, [])
+        return () => clearTimeout(timer);
+    }, []);
 
-    if (loading) return <Loader />
+    const handleCardClick = (id: number) => {
+        router.push(`/profile/announcement/edit_announcement/${id}`);
+    };
+
+    if (loading) return <Loader />;
+
     return (
         <div className="mx-auto px-4 py-8 mt-[98px]">
             <MenuProfile profile={false} anuncio={true} history={false} favorite={false} title='Gerir Anúncios'/>
-            
-            {Anuncios.map((announc) => (
-                <ProfileAnnouncementCard 
-                    key={announc.id} 
-                    isFavorite={announc.favoritoStatus} 
-                    imageSrc={announc.imagem}
-                    location={announc.titulo} 
-                    price={announc.preco}
-                    dimensions={announc.dimensoes}
-                    views={announc.visualizacoes}
-                    clicks={announc.favoritos}
-                    onEdit={() => console.log('Editar anúncio')}
-                />
-            ))}
+            <div>
+                {Anuncios.map((item) => (
+                    <ProfileAnnouncementCard
+                        key={item.id}
+                        announcement={item}
+                        onEdit={() => handleCardClick(item.id)} // redireciona para edição
+                        onFavorite={() => console.log("Favorite", item.id)}
+                    />
+                ))}
+            </div>
         </div>
-    )
+    );
 }
