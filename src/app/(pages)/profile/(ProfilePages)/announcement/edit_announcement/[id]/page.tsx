@@ -32,7 +32,7 @@ export default function EditFavorite() {
   return (
     <div className="mx-auto px-4 py-10 mt-[98px] flex flex-col lg:flex-row gap-8">
       {/* Seção de opções */}
-      <section className="rounded-xl shadow p-6 bg-white w-full lg:w-[400px] max-h-[650px] overflow-y-auto">
+      <section className="rounded-xl shadow p-6 bg-white w-full lg:w-[400px] max-h-[630px] overflow-y-auto">
   <h2 className="text-2xl font-bold text-gray-800 mb-6">Editar Anúncio</h2>
 
   <div className="space-y-6">

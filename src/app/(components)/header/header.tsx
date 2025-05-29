@@ -6,6 +6,8 @@ import SearchBar from "./HeaderComponents/HeaderSearchBar";
 import UserMenu from "./HeaderComponents/HeaderUserMenu";
 import { useState, useEffect } from 'react'
 import {USERDATA} from '@/app/Req/ApiUser'
+import Link from 'next/link'
+import { Plus } from 'lucide-react'
 
 interface HeaderProps {
   disabledMenu?:boolean;
@@ -28,12 +30,26 @@ export default function Header({disabledMenu}:HeaderProps) {
 
   console.log("testando o user: ", user)
   return (
-    <header className="fixed top-0 left-0 right-0 p-2 md:p-4 lg:rounded-b-[25px] shadow-md bg-white transition duration-100" style={{ zIndex: 200 }} >
-      <NavTabs />
+    <header className="fixed top-0 left-0 right-0 p-2 md:p-4 lg:rounded-b-[25px] shadow-md bg-white transition duration-100" style={{ zIndex: 200 }} >     
       <div className=" flex items-center justify-evenly md:justify-between  gap-3"> 
         <Logo />
-        <SearchBar />
-        <UserMenu disabledMenu={disabledMenu}  />
+        <div className="w-[400px]">
+          <NavTabs />
+          <SearchBar />
+        </div>
+        <div className="flex items-center justify-between">
+          <Link
+            href="/adicionar"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF453A] hover:bg-[#e63b31] text-white font-medium rounded-md transition mr-6"
+          >
+            <div className="bg-white rounded-full p-1">
+              <Plus className="w-4 h-4 text-[#FF453A]" />
+            </div>
+            <span>Adicionar</span>
+          </Link>
+
+          <UserMenu disabledMenu={disabledMenu} />
+        </div>
       </div>
     </header>
   );
