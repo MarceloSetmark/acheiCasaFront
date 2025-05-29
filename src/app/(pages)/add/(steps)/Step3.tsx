@@ -19,7 +19,7 @@ const Step2 = () => {
     {
         id: 2,
         text: "Venda",
-        img_src: "/icons-filter/ticket-airline.svg"
+        img_src: "/icons-filter/sell.svg"
     },
   ];
 
