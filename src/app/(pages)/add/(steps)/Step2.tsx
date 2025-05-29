@@ -1,8 +1,15 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import CardSpace from "../(addComponents)/CardSpace";
 
 const Step2 = () => {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+      }, []);
+    
   const cardElement = [
     {
       id: 1,
@@ -25,9 +32,9 @@ const Step2 = () => {
         img_src: "/icons-filter/casa.svg"
     },
     {
-    id: 5,
-    text: "Terreno",
-    img_src: "/icons-filter/campo.svg"
+        id: 5,
+        text: "Terreno",
+        img_src: "/icons-filter/campo.svg"
     },
     {
     id: 6,
@@ -47,7 +54,9 @@ const Step2 = () => {
   ];
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-10">
+    <section className={`max-w-6xl mx-auto px-4 py-10 transition-all duration-700 ease-out ${
+        mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      }`}>
       <h1 className="font-inter font-bold text-[40px] leading-[100%] text-center text-black mb-10">
         Como é o seu espaço?
       </h1>
