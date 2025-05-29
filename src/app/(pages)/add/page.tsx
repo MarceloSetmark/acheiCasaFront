@@ -1,6 +1,7 @@
 "use client";
 import Step1 from './(steps)/Step1'
 import Step2 from './(steps)/Step2'
+import Step3 from './(steps)/Step3'
 import Loading from '@/app/(components)/Loader/loader'
 import { useEffect, useState } from "react";
 
@@ -26,6 +27,8 @@ export default function AddPage() {
         return <Step1 />;
       case 2:
         return <Step2 />;
+      case 3:
+        return <Step3 />;
       default:
         return <Step1 />;
     }
