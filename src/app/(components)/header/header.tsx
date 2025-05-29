@@ -39,13 +39,13 @@ export default function Header({disabledMenu}:HeaderProps) {
         </div>
         <div className="flex items-center justify-between">
           <Link
-            href="/adicionar"
+            href="/add"
             className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF453A] hover:bg-[#e63b31] text-white font-medium rounded-md transition mr-6"
           >
-            <div className="bg-white rounded-full p-1">
-              <Plus className="w-4 h-4 text-[#FF453A]" />
+            <div className="bg-white rounded-[4px] p-1">
+              <Plus className="w-3 h-3 text-[#FF453A]" />
             </div>
-            <span>Adicionar</span>
+            <span className="text-bold">Imóvel</span>
           </Link>
 
           <UserMenu disabledMenu={disabledMenu} />
