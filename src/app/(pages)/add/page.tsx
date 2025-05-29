@@ -1,5 +1,6 @@
 "use client";
 import Step1 from './(steps)/Step1'
+import Step2 from './(steps)/Step2'
 import Loading from '@/app/(components)/Loader/loader'
 import { useEffect, useState } from "react";
 
@@ -16,19 +17,17 @@ export default function AddPage() {
 
   if (loading) return <Loading />
   return (
-    <section className="mx-auto px-4 py-8 mt-[98px] relative ">
+    <section className="mx-auto px-4 py-8 mt-[98px] ">
       <div>
-          <Step1 />
+          <Step2 />
       </div>
-      <div className="absolute left-0 right-0 px-10 py-4">
-      {/* Barra de progresso */}
+      <div className="absolute left-60 right-0 bottom-4 px-10 py-4">
       <div className="w-full h-2 bg-gray-300 rounded-full overflow-hidden">
         <div
           className="h-full bg-red-500 transition-all duration-300"
-          style={{ width: `${(3 / 15) * 100}%` }} // exemplo: etapa 3 de 14
+          style={{ width: `${(3 / 15) * 100}%` }}
         ></div>
       </div>
-
      
       <div className="flex items-center justify-between mt-6">
         <button
